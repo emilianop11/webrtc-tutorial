@@ -1,0 +1,18 @@
+{
+  "name": "webrtcTutorialApp",
+  "version": "0.0.1",
+  "description": "Sample app that implements voxbone js webrtc calling functionality",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Emiliano Pelliccioni",
+  "engines": {
+    "node": "^10.0.0",
+    "npm": "^6.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "voxbone-webrtc": "0.0.9"
+  }
+}
