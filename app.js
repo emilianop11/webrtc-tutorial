@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const Voxbone = require('voxbone-webrtc');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -36,15 +37,31 @@ app.post('/logs', (req, res) => {
 });
 
 app.get('/token_config', function (req, res) {
-  var voxbone = new Voxbone({
-    voxrtcUsername: process.env.webrtc_username,
-    voxrtcSecret: process.env.webrtc_pass,
-    voxrtcExpiresInSeconds: 300
-  });
+  const username = process.env.webrtc_username;
+  const secret = process.env.webrtc_pass;
+  const expires_in_seconds = 300;
 
-  voxrtc_config = voxbone.generate();
-  res.send(voxrtc_config);
+  res.send(generate(username, secret, expires_in_seconds));
 });
+
+function generate(username, secret, expires_in_seconds) {
+  const cleanHmacDigest = function (hmac) {
+    while ((hmac.length % 4 != 0)) {
+        hmac += '=';
+    }
+    hmac = hmac.replace('/ /g', '+');
+    return hmac;
+  };
+
+  let hmac = crypto.createHmac('sha1', secret);
+  expires_in_seconds = expires_in_seconds || 300;
+  const expires = Math.round(Date.now()/1000) + expires_in_seconds;
+  const text = expires + ':' + username;
+  hmac.update(text);
+  const key = cleanHmacDigest(hmac.digest('base64'));
+
+  return {key, expires, username};
+}
 
 app.listen(port, (err) => {
   if (err) {

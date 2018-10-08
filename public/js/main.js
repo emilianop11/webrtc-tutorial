@@ -1,14 +1,12 @@
 function getCredentials() {
-    var req = new XMLHttpRequest();
+    const req = new XMLHttpRequest();
     req.open('GET', '/token_config', false);
     req.send(null);
-    if (req.status == 200)
-        return (eval('(' + req.responseText + ')'));
+    if (req.status == 200) return (JSON.parse(req.responseText));
 }
 
-
 function postLog(message) {
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open("POST", '/logs', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({ message }));
