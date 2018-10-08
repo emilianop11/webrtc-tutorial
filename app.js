@@ -2,7 +2,6 @@ const express = require('express')
 const app = express();
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
-const Voxbone = require('voxbone-webrtc');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
