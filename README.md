@@ -11,7 +11,7 @@ npm install
 * Duplicate .env.example as .env
 * Set the environment variables `webrtc_username` and `webrtc_pass` with your WebRTC credentials.
 
-Also, change the following line to call your own DID: </public/js/main.js#L79>
+Also, change the following line to call your own DID: [Link](/public/js/main.js)
 
 ## Initialize app
 
