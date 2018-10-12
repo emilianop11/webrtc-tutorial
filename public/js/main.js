@@ -77,6 +77,18 @@ function isInCall() {
 function callAction() {
     if (!isInCall()) {
         // Change this line with your desired DID to call
+        
+        //Context is a variable which will hold anything you want to be transparently carried to the call
+        //It is highly recommended to build the context data as a javascript object and send it as a JSON string.
+
+        var yourContext = new Object();
+
+        yourContext.username = 'customername';
+        yourContext.cacheExpire = '2017-01-30 12:23:33.21341';
+        yourContext.remainingCredits = 1234.56;
+        voxbone.WebRTC.context = JSON.stringify(yourContext);
+        
+        
         voxbone.WebRTC.call('543415122184');
         document.getElementById("call-status").innerHTML = '';
     } else {
