@@ -22,7 +22,7 @@ function paramsToObject() {
 }
 
 //voxbone.WebRTC.basicAuthInit('yourwebrtcusername', 'yourwebrtcpass');
-
+voxbone.WebRTC.preferedPop = 'DE';
 voxbone.WebRTC.init(getCredentials());
 
 var eventHandlers = {
